@@ -1,7 +1,7 @@
 from typing import List, TypeVar, Generic
 import sys
 
-T = TypeVar('T') 
+T = TypeVar('T')  
 
 class MinHeap(Generic[T]):
     def __init__(self, elements: List[T] = None):
@@ -12,17 +12,17 @@ class MinHeap(Generic[T]):
     def parent(self, index: int) -> int:
         return (index - 1) // 2
 
-    def leftchild(self, index: int) -> int:
+    def left_child(self, index: int) -> int:
         return 2 * index + 1
 
-    def rightchild(self, index: int) -> int:
+    def right_child(self, index: int) -> int:
         return 2 * index + 2
 
-    def heapifydown(self, index: int):
+    def heapify_down(self, index: int):
         while True:
             smallest = index
-            left = self.leftchild(index)
-            right = self.rightchild(index)
+            left = self.left_child(index)
+            right = self.right_child(index)
 
             if left < len(self.heap) and self.heap[left] < self.heap[smallest]:
                 smallest = left
@@ -35,13 +35,13 @@ class MinHeap(Generic[T]):
             self.heap[index], self.heap[smallest] = self.heap[smallest], self.heap[index]
             index = smallest
 
-    def heapifyup(self, index: int):
+    def heapify_up(self, index: int):
         while index > 0 and self.heap[self.parent(index)] > self.heap[index]:
             parent_idx = self.parent(index)
             self.heap[index], self.heap[parent_idx] = self.heap[parent_idx], self.heap[index]
             index = parent_idx
 
-    def buildmin_heap(self):
+    def build_min_heap(self):
         for i in reversed(range(len(self.heap) // 2)):
             self.heapify_down(i)
 
@@ -96,6 +96,7 @@ def main():
 
         elif choice == "3":
             heap.peek()
+            print("Heap after peek element is displayed:", heap)
 
         elif choice == "4":
             print("Exiting...")
